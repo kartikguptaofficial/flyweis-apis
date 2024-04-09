@@ -1,6 +1,7 @@
 import { TOTP } from 'totp-generator';
 import { createHmac } from 'crypto';
 import base32 from 'thirty-two';
+import jwt from "jsonwebtoken";
 
 function generateSecretKeyFromEmail(phone: any) {
   // Create a HMAC using SHA-256
@@ -25,7 +26,15 @@ function VerifyEmailLoginOtp(phone: any, otp: any) {
   return otp == generatedCode?.otp
 }
 
+const generateJsonWebToken = (email: string, userId: string) => {
+  return jwt.sign({
+    user_id: userId,
+    email: email
+  }, 'secret', { expiresIn: '1h' });
+}
+
 export {
   GenerateEmailLoginOtp,
   VerifyEmailLoginOtp,
+  generateJsonWebToken
 }

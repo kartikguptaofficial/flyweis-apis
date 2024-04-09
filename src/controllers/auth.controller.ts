@@ -1,5 +1,5 @@
 import UserModel from "../models/user.model";
-import { GenerateEmailLoginOtp, VerifyEmailLoginOtp } from "../utils/auth.util"
+import { GenerateEmailLoginOtp, VerifyEmailLoginOtp, generateJsonWebToken } from "../utils/auth.util"
 
 const getOrCreateUserController = async (req: any, res: any) => {
   const reqBody = req.body;
@@ -9,7 +9,9 @@ const getOrCreateUserController = async (req: any, res: any) => {
   if (!userEmail || !userName || !phone) {
     return res.status(400).json({
       success: false,
-      name: "Invalid credentials received"
+      error: "Invalid credentials received",
+      message: "Please provide all the required fields",
+      
     });
   }
 
@@ -18,12 +20,16 @@ const getOrCreateUserController = async (req: any, res: any) => {
 
   if (userDetails) {
     userDetails.last_loggedin_at = Math.ceil(new Date().getTime() / 1000);
+    const token = generateJsonWebToken(userDetails?.email, userDetails?._id);
     await userDetails.save();
     return res.status(200).json({
       success: true,
       status: "ok",
       message: "Already registered! Login successful",
-      data: userDetails
+      data: userDetails,
+      oauth: {
+        access_token: token,
+      }
     })
   }
 
@@ -33,11 +39,16 @@ const getOrCreateUserController = async (req: any, res: any) => {
     phone: phone
   })
 
+  const token = generateJsonWebToken(userDetails?.email, userDetails?._id);
+
   return res.status(200).json({
     success: true,
     status: "ok",
     message: "New User Registered!",
-    data: userDetails
+    data: userDetails,
+    oauth: {
+      access_token: token,
+    }
   })
 }
 
