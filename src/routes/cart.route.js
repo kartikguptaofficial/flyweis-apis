@@ -1,10 +1,10 @@
-import express from "express";
-import { catchAsync } from "../utils/catchAsync.util.js";
-import {
+const express = require("express");
+const { catchAsync } = require("../utils/catchAsync.util.js");
+const {
   getAllCartItemsController,
   addItemToCartController,
-} from "../controllers/cart.controller.js";
-import checkAuthToken from "../middlewares/auth.middleware.js";
+} = require("../controllers/cart.controller.js");
+const checkAuthToken = require("../middlewares/auth.middleware.js");
 const app = express();
 
 app.get(
@@ -18,4 +18,4 @@ app.post(
   catchAsync(addItemToCartController),
 );
 
-export default app;
+module.exports = app;

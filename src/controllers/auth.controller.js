@@ -1,9 +1,9 @@
-import UserModel from "../models/user.model.js";
-import {
+const UserModel = require("../models/user.model.js");
+const {
   GenerateEmailLoginOtp,
   VerifyEmailLoginOtp,
   generateJsonWebToken,
-} from "../utils/auth.util.js";
+} = require("../utils/auth.util.js");
 
 const getOrCreateUserController = async (req, res) => {
   const reqBody = req.body;
@@ -95,7 +95,7 @@ const verifyAuthOTPController = async (req, res) => {
   });
 };
 
-export {
+module.exports = {
   getOrCreateUserController,
   sendAuthOTPController,
   verifyAuthOTPController,

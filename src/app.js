@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
-import AppRoutes from "./routes/index.route.js";
+const express = require("express");
+const cors = require("cors");
+const AppRoutes = require("./routes/index.route.js");
 
 const app = express();
 
@@ -28,4 +28,4 @@ app.use(
 
 app.use("/v1", AppRoutes);
 
-export default app;
+module.exports = app;

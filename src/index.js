@@ -1,5 +1,5 @@
-import ConnectToDatabase from "./utils/database.util.js";
-import app from "./app.js";
+const ConnectToDatabase = require("./utils/database.util.js");
+const app = require("./app.js");
 
 ConnectToDatabase().then(() => {
   app.listen(3000, () => {

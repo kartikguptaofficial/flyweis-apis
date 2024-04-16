@@ -1,4 +1,4 @@
-import ProductModel from "../models/product.model.js";
+const ProductModel = require("../models/product.model.js");
 
 const addProductController = async (req, res) => {
   const payload = req.body;
@@ -50,4 +50,4 @@ const getAllProductsContoller = async (req, res) => {
   });
 };
 
-export { addProductController, getAllProductsContoller };
+module.exports = { addProductController, getAllProductsContoller };

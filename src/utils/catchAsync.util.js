@@ -60,4 +60,4 @@ const catchAsync = (fn) => (req, res, next) => {
   });
 };
 
-export { catchAsync };
+module.exports = { catchAsync };

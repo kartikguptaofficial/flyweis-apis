@@ -1,7 +1,7 @@
-import { TOTP } from "totp-generator";
-import { createHmac } from "crypto";
-import base32 from "thirty-two";
-import jwt from "jsonwebtoken";
+const { TOTP } = require("totp-generator");
+const { createHmac } = require("crypto");
+const base32 = require("thirty-two");
+const jwt = require("jsonwebtoken");
 
 function generateSecretKeyFromPhone(phone) {
   // Create a HMAC using SHA-256
@@ -37,4 +37,4 @@ const generateJsonWebToken = (email, userId) => {
   );
 };
 
-export { GenerateEmailLoginOtp, VerifyEmailLoginOtp, generateJsonWebToken };
+module.exports = { GenerateEmailLoginOtp, VerifyEmailLoginOtp, generateJsonWebToken };

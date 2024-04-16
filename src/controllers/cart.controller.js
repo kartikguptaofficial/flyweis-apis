@@ -1,6 +1,6 @@
-import CartModel from "../models/cart.model.js";
-import ProductModel from "../models/product.model.js";
-import UserModel from "../models/user.model.js";
+const CartModel = require("../models/cart.model.js");
+const ProductModel = require("../models/product.model.js");
+const UserModel = require("../models/user.model.js");
 
 const addItemToCartController = async (req, res) => {
   const productId = req.body?.productId;
@@ -94,4 +94,4 @@ const getAllCartItemsController = async (req, res) => {
   });
 };
 
-export { addItemToCartController, getAllCartItemsController };
+module.exports = { addItemToCartController, getAllCartItemsController };
